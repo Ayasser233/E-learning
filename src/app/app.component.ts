@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from "./shared/layouts/footer/footer.component";
+import { AngularFireModule } from '@angular/fire/compat';
+
 
 @Component({
     selector: 'app-root',
@@ -9,8 +11,10 @@ import { FooterComponent } from "./shared/layouts/footer/footer.component";
     styleUrl: './app.component.css',
     imports: [
       RouterOutlet, 
-      FooterComponent
-    ]
+      FooterComponent,
+      AngularFireModule
+    ],
+    
 })
 export class AppComponent {
   title = 'E-learning';

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "E-learning": {
+    "e-learning": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -26,7 +26,6 @@
             ],
             "styles": [
               "./node_modules/font-awesome/css/font-awesome.css",
-              
               "src/styles.css"
             ],
             "scripts": []
@@ -50,7 +49,13 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -59,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "E-learning:build:production"
+              "buildTarget": "e-learning:build:production"
             },
             "development": {
-              "buildTarget": "E-learning:build:development"
+              "buildTarget": "e-learning:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -70,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "E-learning:build"
+            "buildTarget": "e-learning:build"
           }
         },
         "test": {
@@ -90,6 +95,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "e-learning:build:production",
+              "serveTarget": "e-learning:serve:production"
+            },
+            "development": {
+              "buildTarget": "e-learning:build:development",
+              "serveTarget": "e-learning:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
