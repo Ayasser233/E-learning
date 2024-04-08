@@ -1,0 +1,24 @@
+.txt{
+  padding-left: 95px;  
+  font-weight: bold;
+  font-size: 20px;
+}
+    .nav-link:focus,
+    .nav-link:hover {
+      color: #DD6AA7;
+      font-weight: bold
+    }
+  #navbarText{
+    padding-left: 350px;  
+  }
+  .custom-button {
+    border-radius: 20px; /* Adjust the radius value to your desired value */
+    background-color: #DD6AA7; /* Adjust the color value to your desired color */
+    color: #ffffff; /* Adjust the text color to ensure readability */
+    padding: 8px 16px; /* Adjust the padding to provide appropriate button size */
+    border: none; /* Remove the default button border */
+  }
+  .buttondiv{
+    padding-right: 85px;  
+    padding-left: 20px;  
+  }
