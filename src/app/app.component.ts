@@ -9,6 +9,8 @@ import { Firestore } from '@angular/fire/firestore';
 import { addDoc, collection } from 'firebase/firestore';
 import { CommonModule } from '@angular/common';
 import { PageNotFoundComponent } from "./shared/layouts/page-not-found/page-not-found.component";
+import { SignInComponent } from "./student/sign-in/sign-in.component";
+import { RegisterComponent } from "./student/register/register.component";
 
 
 @Component({
@@ -21,7 +23,9 @@ import { PageNotFoundComponent } from "./shared/layouts/page-not-found/page-not-
         CommonModule,
         FooterComponent,
         HeaderComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        SignInComponent,
+        RegisterComponent
     ]
 })
 export class AppComponent{
