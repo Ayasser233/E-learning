@@ -1,7 +1,7 @@
 import { Course } from './courses';
 
 export interface User {
-    ssn: number;
+    ssn?: number;
     phone: number;
     username: string;
     email: string;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from "./shared/layouts/footer/footer.component";
 //import { AngularFireModule } from '@angular/fire/compat';
@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
 import { PageNotFoundComponent } from "./shared/layouts/page-not-found/page-not-found.component";
 import { SignInComponent } from "./student/sign-in/sign-in.component";
 import { RegisterComponent } from "./student/register/register.component";
+import { ApiService } from './core/service/api.service';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -24,12 +26,10 @@ import { RegisterComponent } from "./student/register/register.component";
         FooterComponent,
         HeaderComponent,
         PageNotFoundComponent,
-        SignInComponent,
-        RegisterComponent
     ]
 })
 export class AppComponent{
+  http = inject(HttpClient);
 
   title : string = 'angular-firebase';
-
 }

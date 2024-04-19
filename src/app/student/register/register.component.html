@@ -1,53 +1,48 @@
 <section class="vh-100 gradient-form" style="background-color: #eee;">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6" >
           <div class="card rounded-3 text-black" style="border-radius: 1rem;">
-            <div class="card-body p-5">
+            <div class="card-body p-5" >
                 <h2 class="text-uppercase text-center mb-5">Create an account</h2>
-                <form>
-                    <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="text" id="form2Example11" class="form-control"/>
-                    <label class="form-label" for="form2Example11">Username</label>
-                </div>
+                <form [formGroup]= "signUpfrom" (ngSubmit)="createUser()">
+                    <div data-mdb-input-init class="form-outline mb-4 formGroup">
+                        <input type="text" id="form2Example11" class="form-control" required formControlName="username"/>
+                        <label class="form-label" for="form2Example11">Username</label>
+                    </div>
 
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="email" id="form2Example11" class="form-control"/>
-                    <label class="form-label" for="form2Example11">Email</label>
-                </div>
+                    <div data-mdb-input-init class="form-outline mb-4 formGroup">
+                        <input type="email" id="form2Example22" class="form-control" formControlName="email"/>
+                        <label class="form-label" for="form2Example22">Email</label>
+                    </div>
 
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="number" id="form2Example11" class="form-control"/>
-                    <label class="form-label" for="form2Example11">Phone</label>
-                </div>
+                    <div data-mdb-input-init class="form-outline mb-4 formGroup">
+                        <input type="number" id="form2Example33" class="form-control" formControlName="phone" />
+                        <label class="form-label" for="form2Example33" >Phone</label>
+                    </div>
 
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="password" id="form2Example22" class="form-control" />
-                    <label class="form-label" for="form2Example22">Password</label>
-                </div>
+                    <div data-mdb-input-init class="form-outline mb-4 formGroup">
+                        <input type="password" id="form2Example44" class="form-control" formControlName="password"/>
+                        <label class="form-label" for="form2Example44"  >Password</label>
+                    </div>
 
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
-                    <label class="form-label" for="form3Example4cdg">Repeat your password</label>
-                </div>
-                <div class="form-check d-flex justify-content-center mb-5">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
-                    <label class="form-check-label" for="form2Example3g">
-                        I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-                    </label>
-                </div>
+                    <div class="form-check d-flex justify-content-center mb-5">
+                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
+                        <label class="form-check-label" for="form2Example3g">
+                            I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
+                        </label>
+                    </div>
 
-                <div class="text-center pt-1 mb-5 pb-1">
-                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block btn-lg gradient-custom-2" type="button">Sign up</button>
-                </div>
+                    <div class="text-center pt-1 mb-5 pb-1">
+                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block btn-lg gradient-custom-2" type="submit">Sign up</button>
+                    </div>
 
-                <div class="d-flex align-items-center justify-content-center pb-4">
-                    <p class="mb-0 me-2">Have already an account?</p>
-                    <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger">Login here</button>
-                </div>
+                    <div class="d-flex align-items-center justify-content-center pb-4">
+                        <p class="mb-0 me-2">Have already an account?</p>
+                        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger">Login here</button>
+                    </div>
 
                 </form>
-
             </div>
           </div>
         </div>

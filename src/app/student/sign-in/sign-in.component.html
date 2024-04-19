@@ -11,21 +11,21 @@
                 <h4 class="mt-1 mb-5 pb-1">TeachMe</h4>
                 </div>
 
-                <form>
+                <form #loginForm="ngForm" (ngSubmit) = "submitHandler(loginForm)">
                 <p>Please login to your account</p>
 
                 <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="email" id="form2Example11" class="form-control"/>
+                    <input ngModel type="email" name="email" id="form2Example11" class="form-control"/>
                     <label class="form-label" for="form2Example11">Username</label>
                 </div>
 
                 <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="password" id="form2Example22" class="form-control" />
+                    <input ngModel type="password" name="password" id="form2Example22" class="form-control" />
                     <label class="form-label" for="form2Example22">Password</label>
                 </div>
 
                 <div class="text-center pt-1 mb-5 pb-1">
-                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block btn-lg gradient-custom-2 mb-3" type="button">Log
+                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block btn-lg gradient-custom-2 mb-3" type="submit">Log
                     in</button>
                     <a class="text-muted" href="#!">Forgot password?</a>
                 </div>
