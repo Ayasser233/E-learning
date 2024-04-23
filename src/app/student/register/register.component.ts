@@ -26,7 +26,7 @@ export class RegisterComponent {
   authService = inject(ApiService);
   router = inject(Router);
   
-  constructor(private formBuilder:FormBuilder ,private apiService: ApiService) {  }
+  constructor(private formBuilder:FormBuilder) {  }
 
   ngOnInit():void{
     this.href = this.router.url;
@@ -50,15 +50,20 @@ export class RegisterComponent {
       return;
     }
     this.user_reg_data = this.signUpfrom.value;
-    this.user_dto={
-      username:this.user_reg_data.username ,
-      email:this.user_reg_data.email,
-      password:this.user_reg_data.password,
-      phone: this.user_reg_data.phone,
+    this.user_dto = {
+      username: this.user_reg_data.username || '', // Add null check and provide a default value
+      email: this.user_reg_data.email || '', // Add null check and provide a default value
+      password: this.user_reg_data.password || '', // Add null check and provide a default value
+      phone: this.user_reg_data.phone || '', // Add null check and provide a default value
       approved: false,
-      role: this.user_reg_data.role
-    }
-    this.authService.register(this.user_dto).then(() => {
+      role: this.user_reg_data.role || '' // Add null check and provide a default value
+    };
+    this.authService.register(
+      this.user_dto.email || '', // Add null check and provide a default value
+      this.user_dto.password || '', // Add null check and provide a default value
+      this.user_dto.username || '', // Add null check and provide a default value
+      this.user_dto.phone || '' // Add null check and provide a default value
+    ).then(() => {
       console.log('Created new user successfully!');
       this.signUpfrom.reset();
       this.router.navigate(['/sign-in']);

@@ -1,17 +1,17 @@
 import { Course } from './courses';
 
-export interface User {
+export class User {
     ssn?: number;
-    phone: number;
-    username: string;
-    email: string;
-    password: string;
-    approved: boolean;
+    phone?: string;
+    username?: string;
+    email?: string;
+    password?: string;
+    approved?: boolean;
     level?: number;
     gpa?: number;
     registeredCourses?: Course[];
     completedCourses?: Course[];
-    role: UserRole;
+    role?: UserRole;
   }
 
   export enum UserRole {

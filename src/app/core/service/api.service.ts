@@ -14,11 +14,10 @@ import {
   setDoc,
   updateDoc,
 } from '@angular/fire/firestore';
-import { User } from '../models/user';
-import { Observable, from } from 'rxjs';
-import { Auth, signInWithEmailAndPassword, UserCredential } from '@angular/fire/auth';
+import { Observable, Subscription, from } from 'rxjs';
+import { Auth, UserCredential, User, authState } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {  createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 
 const PATH = 'users';
@@ -28,23 +27,34 @@ const PATH = 'users';
 })
 export class ApiService {
 
-  firebaseAuth = inject(Auth);
+  private auth: Auth = inject(Auth);
+  authState$ = authState(this.auth);
   private _firestore = inject(Firestore);
 
   private _collection = collection(this._firestore, PATH);
+  userSubscription: Subscription
+  currentUser: User | null = null;
+
 
   
-  constructor(private auth: Auth, private router: Router) { }
+  constructor() {
+    this.userSubscription = this.authState$.subscribe((aUser: User | null) => {
+      if(aUser){
+        this.currentUser = aUser;
+
+      }
+    })
+   }
 
 
-  register(user: User) {
-    return addDoc(this._collection, user);
-
+  register(email: string, password: string, userName: string, phone: string){
+    const userData = createUserWithEmailAndPassword(this.auth,email,password);
+    return userData;
   }
   signIn(email: string, password: string): Promise<UserCredential> {
-    return signInWithEmailAndPassword(this.firebaseAuth, email, password);
+    return signInWithEmailAndPassword(this.auth, email, password);
   }
   signOut(){
-    return this.firebaseAuth.signOut();
+    this.auth.signOut();
   }
 }
