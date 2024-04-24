@@ -15,7 +15,7 @@ import {
   updateDoc,
 } from '@angular/fire/firestore';
 import { Observable, Subscription, from } from 'rxjs';
-import { Auth, UserCredential, User, authState } from '@angular/fire/auth';
+import { Auth, UserCredential, User, authState, updateProfile } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import {  createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
@@ -47,13 +47,25 @@ export class ApiService {
    }
 
 
-  register(email: string, password: string, userName: string, phone: string){
-    const userData = createUserWithEmailAndPassword(this.auth,email,password);
-    return userData;
+  register(email: string, password: string, data:any){
+    return createUserWithEmailAndPassword(this.auth,email,password)
+    .then((UserCredential) => {
+      const user = UserCredential.user;
+      setDoc(doc(this._firestore, PATH, user.uid), data).then(() => {
+        console.log('User created!');}).catch((error) => {
+          console.error('Error creating user: ', error);
+        });
+    }).catch((error) => {
+      console.error('Error creating user: ', error);
+    });
   }
+
+
   signIn(email: string, password: string): Promise<UserCredential> {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
+
+
   signOut(){
     this.auth.signOut();
   }
