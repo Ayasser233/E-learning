@@ -1,1 +1,82 @@
-<p>admin-dashboard works!</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <link rel="stylesheet" href="admin-dashboard.component.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Admin Dashboard</h1>
+        <form (ngSubmit)="onAdd(taskform)" #taskform="ngForm">
+            <div class="form-group">
+                <label for="name" class="form-label">Title:</label>
+                <input type="text" class="form-control" id="name" ngModel name="name" placeholder="Enter title" required>
+            </div>
+            <div class="form-group">
+                <label for="description" class="form-label">Description:</label>
+                <textarea class="form-control" id="description" ngModel name="description" rows="3" placeholder="Add a description"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Course</button>
+        </form>
+        <div class="container">
+            <div class="card">
+                <h2>Course Management</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let task of taskArray; index as i">
+                            <td>
+                                <a [routerLink]="['/task', i]">{{ task.name }}</a>
+                            </td>
+                            <td>{{ task.description }}</td>
+                            <td>
+                                <button class="btn btn-danger" (click)="onDelete(i)">Archive</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>        
+    </div>
+    <div class="container">
+        <div class="card">
+            <h2>User Management</h2>
+            <p>Manage user accounts, including approving new accounts and deleting or deactivating existing accounts.</p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <button class="btn" [ngClass]="{'btn-success': user.status === 'pending' || user.status === 'inactive', 'btn-warning': user.status === 'active'}" (click)="toggleUserStatus(user.id)">
+                                {{ user.status === 'active' ? 'Deactivate' : 'Approve' }}
+                            </button>
+                            <button class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button>
+                            <span *ngIf="user.status !== 'pending'" class="badge" [ngClass]="{'badge-blue': user.status === 'active', 'badge-lightblue': user.status === 'inactive'}">
+                                {{ user.status }}
+                            </span>
+                        </td>
+                    </tr>                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
