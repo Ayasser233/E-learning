@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { User } from '../../core/models/user';
+import { User, UserRole } from '../../core/models/user';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm,ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -25,6 +25,7 @@ export class RegisterComponent {
   fb = inject(FormBuilder);
   authService = inject(ApiService);
   router = inject(Router);
+  UserRole: any;
   
   constructor(private formBuilder:FormBuilder ,private apiService: ApiService) {  }
 
@@ -41,7 +42,8 @@ export class RegisterComponent {
       password: [''],
       phone: [''],
       approved: [false],
-      role: ['']
+      role: [UserRole.Student],
+      
     });
   }
 
@@ -56,7 +58,7 @@ export class RegisterComponent {
       password:this.user_reg_data.password,
       phone: this.user_reg_data.phone,
       approved: false,
-      role: this.user_reg_data.role
+      role: this.user_reg_data.role as UserRole
     }
 
     const email = this.user_dto.email || ''; // Add null check for email

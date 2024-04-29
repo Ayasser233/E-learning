@@ -23,7 +23,15 @@
 
                     <div data-mdb-input-init class="form-outline mb-4 formGroup">
                         <input type="password" id="form2Example44" class="form-control" formControlName="password"/>
-                        <label class="form-label" for="form2Example44"  >Password</label>
+                        <label class="form-label" for="form2Example44">Password</label>
+                    </div>
+
+                    <label for="role">Role:</label>
+                    <div class="mb-4 formGroup" aria-label="Default select example">
+                            <select formControlName="role" id="role" class="form-select form-control">
+                                <option value="student">Student</option>
+                                <option value="instructor">Instructor</option>
+                            </select>
                     </div>
 
                     <div class="form-check d-flex justify-content-center mb-5">

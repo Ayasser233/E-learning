@@ -15,9 +15,11 @@ import {
   updateDoc,
 } from '@angular/fire/firestore';
 import { Observable, Subscription, from } from 'rxjs';
-import { Auth, UserCredential, User, authState, updateProfile } from '@angular/fire/auth';
+import { Auth, UserCredential, authState, updateProfile } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import {  createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../models/user';
 
 
 const PATH = 'users';
@@ -31,39 +33,46 @@ export class ApiService {
   authState$ = authState(this.auth);
   private _firestore = inject(Firestore);
 
-  private _collection = collection(this._firestore, PATH);
-  userSubscription: Subscription
-  currentUser: User | null = null;
-
+  private firestoreUrl = 'https://firestore.googleapis.com/v1/projects/e-learning-8c259/databases/(default)/documents';
 
   
-  constructor() {
-    this.userSubscription = this.authState$.subscribe((aUser: User | null) => {
-      if(aUser){
-        this.currentUser = aUser;
-
-      }
-    })
-   }
+  constructor(private http: HttpClient) {}
 
 
-  register(email: string, password: string, data:any){
-    return createUserWithEmailAndPassword(this.auth,email,password)
-    .then((UserCredential) => {
+  async register(email: string, password: string, data:any){
+    try {
+      const UserCredential = await createUserWithEmailAndPassword(this.auth, email, password);
       const user = UserCredential.user;
       setDoc(doc(this._firestore, PATH, user.uid), data).then(() => {
-        console.log('User created!');}).catch((error) => {
-          console.error('Error creating user: ', error);
-        });
-    }).catch((error) => {
-      console.error('Error creating user: ', error);
-    });
+        console.log('User created!');
+      }).catch((error) => {
+        console.error('Error creating user: ', error);
+      });
+    } catch (error_1) {
+      console.error('Error creating user: ', error_1);
+    }
   }
 
 
-  signIn(email: string, password: string): Promise<UserCredential> {
-    return signInWithEmailAndPassword(this.auth, email, password);
+  async signIn(email: string, password: string): Promise<string> {
+    try{
+      const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+      const user = userCredential.user;
+      const userId: string = user.uid;
+
+      localStorage.setItem('userId', userId);
+      return userId;
+    } catch(error){
+      console.log(error);
+      throw error;
+    }
   }
+
+  getUsersByID(id: string): Observable<User> {
+    let url: string = `${this.firestoreUrl}/${PATH}/${id}`;
+    return this.http.get<User>(url);
+  }
+
 
 
   signOut(){
