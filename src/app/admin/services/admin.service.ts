@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 export class AdminService {
   private list: any[] = [];
 
+  private firestoreUrl = 'https://firestore.googleapis.com/v1/projects/e-learning-8c259/databases/(default)/documents';
+
   constructor() { }
 
   getList() {

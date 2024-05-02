@@ -20,9 +20,8 @@ export class SignInComponent {
   authService = inject(ApiService);
 
   userID = localStorage.getItem('userId');
-  UserRole: any;
-  user_dto!:User;
-
+  users: any[] = [];
+  user_dto:User | undefined;
 
 
   constructor(private apiService: ApiService, private router: Router) { 
@@ -39,15 +38,14 @@ export class SignInComponent {
         next: (userId) => {
           this.signInForm.reset();
           console.log('login successfully!');
-          this.authService.getUsersByID(userId).subscribe((user: User) => {
+          
+          this.authService.getUsersByID(userId).subscribe((user) => {
             this.user_dto = user;
-            this.user_dto.role = UserRole.Student;
-            if(this.user_dto.role === UserRole.Student){
-              this.router.navigate(['/home']);
-            }
-            else if(this.user_dto.role === UserRole.Instructor){
-              this.router.navigate(['/instructor']);
-            }
+            const userData = JSON.parse(JSON.stringify(this.user_dto));
+            const user_role = userData.fields.role.stringValue;
+            console.log(user_role);
+            user_role === UserRole.Student ? this.router.navigate(['/']) : this.router.navigate(['/admin']);
+          
           });
 
         },
