@@ -32,30 +32,29 @@ export class SignInComponent {
   }
 
   submitHandler() {
-    
-      const { email, password } = this.signInForm.value;
-      from(this.authService.signIn(email, password)).subscribe({
-        next: (userId) => {
-          this.signInForm.reset();
-          console.log('login successfully!');
-          
-          this.authService.getUsersByID(userId).subscribe((user) => {
-            this.user_dto = user;
-            const userData = JSON.parse(JSON.stringify(this.user_dto));
-            const user_role = userData.fields.role.stringValue;
-            console.log(user_role);
-            user_role === UserRole.Student ? this.router.navigate(['/']) : this.router.navigate(['/admin']);
-          
-          });
+    const { email, password } = this.signInForm.value;
+    from(this.authService.signIn(email, password)).subscribe({
+      next: (userId) => {
+        this.signInForm.reset();
+        console.log('login successfully!');
+        
+        this.authService.getUsersByID(userId).subscribe((user) => {
+          this.user_dto = user;
+          const userData = JSON.parse(JSON.stringify(this.user_dto));
+          const user_role = userData.fields.role.stringValue;
+          console.log(user_role);
+          user_role === UserRole.Student ? this.router.navigate(['/']) : this.router.navigate(['/admin']);
+        
+        });
 
-        },
-        error: (error: FirebaseError) => {
-          if(error.message.includes('auth/invalid-credential')){
-            this.invalidEmailOrPassword = true;
-            
-          }
+      },
+      error: (error: FirebaseError) => {
+        if(error.message.includes('auth/invalid-credential')){
+          this.invalidEmailOrPassword = true;
+          
         }
-      })
-    
+      }
+    })
+  
   }
 }

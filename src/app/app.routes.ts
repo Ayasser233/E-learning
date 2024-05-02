@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './student/home/home.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { SignInComponent } from './student/sign-in/sign-in.component';
 import { RegisterComponent } from './student/register/register.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { CourseCrudComponent } from './admin/course-crud/course-crud.component';
+import { OverviewComponent } from './student/overview/overview.component';
 
 export const routes: Routes = [
     
@@ -13,7 +14,8 @@ export const routes: Routes = [
         {path:"register", component:RegisterComponent},
         {path:"sign-in" , component:SignInComponent},
         {path:"admin" , component:AdminDashboardComponent},
-        {path: "task/:id",component:CourseCrudComponent}
+        {path: "task/:id",component:CourseCrudComponent},
+        {path: "overview", component:OverviewComponent}
     ]},
     
     {path:"", redirectTo:"home", pathMatch:"full"},
