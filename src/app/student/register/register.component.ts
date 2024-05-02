@@ -67,7 +67,7 @@ export class RegisterComponent {
     this.authService.register(email, password, this.user_dto).then(() => {
       console.log('Created new user successfully!');
       this.signUpfrom.reset();
-      this.router.navigate(['/sign-in']);
+      this.router.navigate(['']);
       this.submitted = true;
     });
   }

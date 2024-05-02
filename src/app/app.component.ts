@@ -1,5 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit,inject } from '@angular/core';
+import { RouterOutlet,RouterLink, RouterLinkActive, } from '@angular/router';
 import { FooterComponent } from "./shared/layouts/footer/footer.component";
 //import { AngularFireModule } from '@angular/fire/compat';
 //import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
@@ -13,8 +13,8 @@ import { SignInComponent } from "./student/sign-in/sign-in.component";
 import { RegisterComponent } from "./student/register/register.component";
 import { ApiService } from './core/service/api.service';
 import { HttpClient } from '@angular/common/http';
-
-
+import { CoursesComponent } from './instructor/courses/courses.component';
+import { CourseinfoComponent } from "./instructor/courseinfo/courseinfo.component";
 @Component({
     selector: 'app-root',
     standalone: true,
@@ -26,6 +26,14 @@ import { HttpClient } from '@angular/common/http';
         FooterComponent,
         HeaderComponent,
         PageNotFoundComponent,
+        SignInComponent,
+        RegisterComponent,
+        CoursesComponent,
+        RouterLink,
+        
+        CourseinfoComponent,
+        RouterLinkActive,
+        
     ]
 })
 export class AppComponent{

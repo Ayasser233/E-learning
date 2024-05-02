@@ -23,7 +23,7 @@ import { User } from '../models/user';
 
 
 const PATH = 'users';
-
+const cPATH = 'courses';
 @Injectable({
   providedIn: 'root'
 })
@@ -73,7 +73,10 @@ export class ApiService {
     return this.http.get<User>(url);
   }
 
-
+  deleteDocument( documentId: string): Observable<any> {
+    let url: string = `${this.firestoreUrl}/${cPATH}/${documentId}`;
+    return this.http.delete(url);
+  }
 
   signOut(){
     this.auth.signOut();

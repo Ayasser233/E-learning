@@ -1,0 +1,63 @@
+<div class="img">
+  <img width="100%"   src="assets/instructor.jpg" alt="">
+</div>
+
+<h2 style="padding-left:30px ;">Markting Research for begineers</h2>
+<div class="buttondiv">
+  <button class="custom-button" type="button" [class.clicked]="button1Clicked" (click)="toggleButtonState(1)">Course content</button>
+  <button class="custom-button" type="button" [class.clicked]="button2Clicked" (click)="toggleButtonState(2)">Assignment</button>
+  <button class="custom-button" type="button" [class.clicked]="button3Clicked" (click)="toggleButtonState(3)">Students</button>
+</div>
+@if(button1Clicked){
+  <div class="d-flex">
+    <div class="w-40">
+      <div class="list-group ps-5 pt-1 pb-4" *ngFor="let coursee of course">
+        <label class="list-group-item  list-group-item-gray">
+          <input class="form-check-input me-1" type="checkbox" value="">
+          {{ coursee.chapters }}: {{ coursee.description }}
+        </label>
+      </div>
+      <div class="buttondiv">
+        <button class="add-button" type="button"(click)="ShowAddchapter()">Add chapter</button>
+      </div>
+    </div>
+    <div class="w-0" style="padding-left: 150px;padding-top: 20px;width: 70%;"> <!-- Adjust the width and padding as needed -->
+      <mdb-accordion [flush]="true">
+        <mdb-accordion-item *ngFor="let coursee of course">
+          <ng-template mdbAccordionItemHeader>{{ coursee.chapters }}: {{ coursee.description }}</ng-template>
+          <ng-template mdbAccordionItemBody>
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+          </ng-template>
+        </mdb-accordion-item>
+      </mdb-accordion>
+    </div>
+  </div>
+  
+    @if (addchapt) {
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 d-flex justify-content-center">
+            <div class="col-sm-4 border rounded p-3 mb-5">
+              <div class="row text-center">
+                <div class="col-sm-12">
+                  <input class="form-control mb-3" [(ngModel)]="chapterName" placeholder="chapter name" />
+                  <input class="form-control mb-3" [(ngModel)]="chapterDescription" placeholder="cahapter Description" />
+                  
+                  
+                  <input type="file" class="form-control" id="customFile" />
+                </div>
+                <div class="buttondiv">
+                  <button class="add-button" type="button" (click)="addchapter()">Add chapter</button>  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+    }
+  }
+  
+    
+  

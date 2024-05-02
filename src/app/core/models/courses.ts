@@ -1,13 +1,33 @@
-export interface Course {
-    id: number;
+export class Course {
+  private static instance: Course;
+    id: string;
     title: string;
     description: string;
-    instructorId: number;
+    instructorId: string;
     materials: CourseMaterial[];
     assignments: Assignment[];
-    hours: number;
+    hours: string;
     students: number[]; // Array of student IDs enrolled in the course
+    private constructor() {
+      // Private constructor to prevent direct instantiation
+      this.id=''
+      this.title=''
+      this.description=''
+      this.instructorId=''
+      this.materials=[]
+      this.assignments=[]
+      this.hours=''
+      this.students=[]
+  }
+
+  public static getInstance(): Course {
+      if (!Course.instance) {
+          Course.instance = new Course();
+      }
+      return Course.instance;
+  }
 }
+
 
 export interface CourseMaterial {
     id: number;

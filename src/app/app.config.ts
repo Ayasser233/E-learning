@@ -20,6 +20,8 @@ export const appConfig: ApplicationConfig = {
         
     ]),
     provideAnimations(),
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
+    provideAnimations(),
+    provideAnimations()
 ]
 };
