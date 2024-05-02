@@ -1,0 +1,28 @@
+.img{
+  padding-bottom: 20px;
+}
+.custom-button {
+  border-radius: 8px; /* Adjust the radius value to your desired value */
+  background-color: #b8adb3; /* Adjust the color value to your desired color */
+  color: #ffffff; /* Adjust the text color to ensure readability */
+  padding: 8px 16px; /* Adjust the padding to provide appropriate button size */
+  border: none; /* Remove the default button border */
+}
+.custom-button.clicked{
+  background-color: #DD6AA7; 
+}
+.buttondiv{
+  padding-top: 10px;
+  padding-left: 60px;
+  padding-bottom:30px ;  
+  }
+  .buttondiv button {
+    margin-right: 30px; /* Adjust the value as per your desired spacing */
+  }
+  .add-button {
+    border-radius: 8px; /* Adjust the radius value to your desired value */
+    background-color: #DD6AA7; /* Adjust the color value to your desired color */
+    color: #ffffff; /* Adjust the text color to ensure readability */
+    padding: 8px 16px; /* Adjust the padding to provide appropriate button size */
+    border: none; /* Remove the default button border */
+  }

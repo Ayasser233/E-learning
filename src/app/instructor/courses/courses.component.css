@@ -1,0 +1,46 @@
+.listt {
+  padding-right: 200px;
+  padding-left: 200px;
+  padding-top: 30px;
+  padding-bottom: 40px;
+
+}
+.custom-button {
+  border-radius: 20px; /* Adjust the radius value to your desired value */
+  background-color: #DD6AA7; /* Adjust the color value to your desired color */
+  color: #ffffff; /* Adjust the text color to ensure readability */
+  padding: 8px 16px; /* Adjust the padding to provide appropriate button size */
+  border: none; /* Remove the default button border */
+}
+.buttondiv{
+padding-top: 80px;
+  
+}
+.custom-button {
+  display: block;
+  margin: auto;
+}
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table  {
+  border: 1px solid rgb(239, 239, 239);
+  padding: 8px;
+}
+.menu {
+  position: absolute; /* Adjust positioning as needed */
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+
+.hidden {
+  display: none;
+}
+.profile{
+  padding-top: 50px;
+}
+.container2{
+  padding-top: 80px;
+}
