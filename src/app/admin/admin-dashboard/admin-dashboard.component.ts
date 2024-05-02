@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AdminService } from '../services/admin.service';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
-interface Course {
+export interface Course {
   id: number;
-  title: string;
+  name: string;
   description: string;
-  actions: string;
 }
+
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -18,7 +19,8 @@ interface Course {
   imports: [
     CommonModule,   
     RouterModule,    
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.css']
@@ -45,13 +47,19 @@ export class AdminDashboardComponent {
 
   onAdd(form: NgForm) {
     if (!form.valid) {
-      return; 
+      return;
     }
 
-    let newTask = form.value; 
+    let newTask: Course = {
+      id: this.taskArray.length + 1,
+      name: form.value.name,
+      description: form.value.description
+    };
 
-    this.taskArray.push(newTask); 
-    this.adminService.setList(this.taskArray); 
+    this.taskArray.push(newTask);
+    this.adminService.addCourse(newTask);
+
+    form.reset();
   }
 
   onDelete(index: number) {
