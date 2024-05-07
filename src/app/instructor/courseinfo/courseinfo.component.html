@@ -1,38 +1,45 @@
 <div class="img">
-  <img width="100%"   src="assets/instructor.jpg" alt="">
+  <img width="100%"src="assets/instructor.jpg" alt="">
 </div>
 
-<h2 style="padding-left:30px ;">Markting Research for begineers</h2>
+<h2 style="padding-left:30px ;">{{name}}</h2>
 <div class="buttondiv">
   <button class="custom-button" type="button" [class.clicked]="button1Clicked" (click)="toggleButtonState(1)">Course content</button>
   <button class="custom-button" type="button" [class.clicked]="button2Clicked" (click)="toggleButtonState(2)">Assignment</button>
   <button class="custom-button" type="button" [class.clicked]="button3Clicked" (click)="toggleButtonState(3)">Students</button>
 </div>
 @if(button1Clicked){
-  <div class="d-flex">
+  <div class="d-flex" id="chapters">
     <div class="w-40">
       <div class="list-group ps-5 pt-1 pb-4" *ngFor="let coursee of course">
         <label class="list-group-item  list-group-item-gray">
           <input class="form-check-input me-1" type="checkbox" value="">
-          {{ coursee.chapters }}: {{ coursee.description }}
+          {{ coursee.name }}: {{coursee.description}}
+          
         </label>
+        <label class="list-group-item  list-group-item-gray" style="padding-left: 40px;">
+          <button type="button" class="btn btn-outline-warning" (click)="showEditchapter(coursee.id,coursee.name,coursee.description)">Edit</button>
+          <button type="button" class="btn btn-outline-danger"(click)="removeChapter(coursee.id)">Remove</button>
+        </label>
+        
+
       </div>
       <div class="buttondiv">
         <button class="add-button" type="button"(click)="ShowAddchapter()">Add chapter</button>
       </div>
     </div>
-    <div class="w-0" style="padding-left: 150px;padding-top: 20px;width: 70%;"> <!-- Adjust the width and padding as needed -->
+    <div class="w-0" style="padding-left: 150px;padding-top: 20px;width: 70%;"> 
       <mdb-accordion [flush]="true">
         <mdb-accordion-item *ngFor="let coursee of course">
-          <ng-template mdbAccordionItemHeader>{{ coursee.chapters }}: {{ coursee.description }}</ng-template>
+          <ng-template mdbAccordionItemHeader>{{ coursee.name }}: {{coursee.description}}</ng-template>
           <ng-template mdbAccordionItemBody>
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+            <a href="assets/{{coursee.pdfLink}}" >{{coursee.pdfLink}}</a>  
+            
           </ng-template>
         </mdb-accordion-item>
       </mdb-accordion>
     </div>
   </div>
-  
     @if (addchapt) {
       <div class="container">
         <div class="row">
@@ -41,13 +48,13 @@
               <div class="row text-center">
                 <div class="col-sm-12">
                   <input class="form-control mb-3" [(ngModel)]="chapterName" placeholder="chapter name" />
-                  <input class="form-control mb-3" [(ngModel)]="chapterDescription" placeholder="cahapter Description" />
+                  <input class="form-control mb-3" [(ngModel)]="chapterDescription" placeholder="chapter Description" />
                   
                   
-                  <input type="file" class="form-control" id="customFile" />
+                  <input type="file" class="form-control" (change)="handleFileInput($event)" id="customFile" />
                 </div>
                 <div class="buttondiv">
-                  <button class="add-button" type="button" (click)="addchapter()">Add chapter</button>  
+                  <button class="add-button" type="button" (click)="addChapter()">Add chapter</button>  
                 </div>
               </div>
             </div>
@@ -56,7 +63,105 @@
       </div>
       
       
+    }@else if (Editchapt) 
+    {
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 d-flex justify-content-center">
+            <div class="col-sm-4 border rounded p-3 mb-5">
+              <div class="row text-center">
+                <div class="col-sm-12">
+                  <input class="form-control mb-3" [(ngModel)]="chapterName" placeholder="chapter name" />
+                  <input class="form-control mb-3" [(ngModel)]="chapterDescription" placeholder="chapter Description" />
+                  
+                  
+                  <input type="file" class="form-control"  (change)="handleFileInput($event)"id="customFile" />
+                </div>
+                <div class="buttondiv">
+                  <button class="add-button" type="button" (click)="editChapter()">update chapter</button>  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     }
+  }@else if (button2Clicked) 
+  {
+    <div class="d-flex" id="chapters">
+      <div class="w-40">
+        <div class="list-group ps-5 pt-1 pb-4" *ngFor="let _assignment of assignment">
+          <label class="list-group-item  list-group-item-gray">
+            <input class="form-check-input me-1" type="checkbox" value="">
+            {{ _assignment.title }} :{{_assignment.description}}
+          </label>
+          <label class="list-group-item  list-group-item-gray" style="padding-left: 40px;">
+            <button type="button" class="btn btn-outline-warning" (click)="ShowEditAssignment( _assignment.id,_assignment.title,_assignment.description)">Edit</button>
+            <button type="button" class="btn btn-outline-danger"(click)="removeAssignment(_assignment.id)">Remove</button>
+          </label>
+        </div>
+        <div class="buttondiv">
+          <button class="add-button" type="button"(click)="ShowAddAssignment()">Add Assignment</button>
+        </div>
+      </div>
+      <div class="w-0" style="padding-left: 150px;padding-top: 20px;width: 70%;"> <!-- Adjust the width and padding as needed -->
+        <mdb-accordion [flush]="true">
+          <mdb-accordion-item *ngFor="let _assignment of assignment">
+            <ng-template mdbAccordionItemHeader>{{ _assignment.title }}:{{_assignment.description}}</ng-template>
+            <ng-template mdbAccordionItemBody>
+              
+              <a href="assets/{{_assignment.assignmentLink}}" >{{_assignment.assignmentLink}}</a>  
+            <p> released date: {{_assignment.dueDate}}</p>
+            </ng-template>
+          </mdb-accordion-item>
+        </mdb-accordion>
+      </div>
+    </div>
+      @if (addassignment) {
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 d-flex justify-content-center">
+              <div class="col-sm-4 border rounded p-3 mb-5">
+                <div class="row text-center">
+                  <div class="col-sm-12">
+                    <input class="form-control mb-3" [(ngModel)]="chapterName" placeholder="Assignment name" />
+                    <input class="form-control mb-3" [(ngModel)]="chapterDescription" placeholder="Assignment Description" />
+                    
+                    <input type="file" class="form-control"  (change)="handleAssignmentInput($event)"id="customFile" />
+                  </div>
+                  <div class="buttondiv">
+                    <button class="add-button" type="button" (click)="addAssignment()">Add Assignment</button>  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+      }@else if (Editassignment)
+       {
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 d-flex justify-content-center">
+              <div class="col-sm-4 border rounded p-3 mb-5">
+                <div class="row text-center">
+                  <div class="col-sm-12">
+                    <input class="form-control mb-3" [(ngModel)]="chapterName" placeholder="Assignment name" />
+                    <input class="form-control mb-3" [(ngModel)]="chapterDescription" placeholder="Assignment Description" />
+                    
+                    <input type="file" class="form-control" (change)="handleAssignmentInput($event)" id="customFile" />
+                  </div>
+                  <div class="buttondiv">
+                    <button class="add-button" type="button" (click)="editAssignment()">Add Assignment</button>  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       }
+  
   }
   
     

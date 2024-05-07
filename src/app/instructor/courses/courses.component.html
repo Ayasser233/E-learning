@@ -1,77 +1,127 @@
-  <div class="profile">
-  <div class="container d-flex justify-content-center align-items-start py-2" style="height: 40vh; max-width: 1200px;">
-    <div class="col-md-8 bg-white text-center p-5" style="width: 90%; border: 2px solid #FFDDD1;">
-      <div class="row">
-        <div class="col-md-4 d-flex align-items-center">
-          <img width="80" height="100" class="img-fluid mx-auto d-block mb-3 rounded-circle" style="border-radius: 50%" src="assets/teacher.webp" alt="">
-        </div>
-        <div class="col-md-8 d-flex flex-column justify-content-center">
-          <h1 class="mt-0">Ramy Ahmed</h1>
-          
-          <p>instructor</p>
+<div class="profile">
+<div class="container d-flex justify-content-center align-items-start py-2" style="height: 40vh; max-width: 1200px;">
+<div class="col-md-8 bg-white text-center p-5" style="width: 90%; border: 2px solid #FFDDD1;">
+  <div class="row">
+    <div class="col-md-4 d-flex align-items-center">
+      <img width="80" height="100" class="img-fluid mx-auto d-block mb-3 rounded-circle" style="border-radius: 50%" src="assets/teacher.webp" alt="">
+    </div>
+    <div class="col-md-8 d-flex flex-column justify-content-center">
+      <h1 class="mt-0">{{iname}}</h1>
+      
+      <p>instructor</p>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="listt">
+<h4 class="text-center ">{{title}}</h4>
+
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+@if(isAvailable){
+  <table class="table" id="ta">
+    <thead>
+        <tr>
+            <th>Courses</th>
+            <th>Action</th>              
+        </tr>
+    </thead>
+    <tbody>
+        @for(task of Cours; track $index){
+        <tr>
+            <td colspan="3">    
+                <div class="card" style="width: 100%;">
+                    <div class="d-flex align-items-stretch">
+                        <a href="courseinfo" (click)="passID(task.id,task.name)">
+                            <img src="assets/{{task.imgsrc}}" class="img-fluid rounded-start" alt="Card image" style="width: 250px; height: auto;padding-top: 10px;">
+                        </a>
+                        <div class="flex-grow-1">
+                            <div class="card-body">
+                                <a href="courseinfo"(click)="passID(task.id,task.name)">
+                                    <h5 class="card-title" style="padding-top: 15px; color: #000;">{{task.name}}</h5>
+                                    <div class="col-md-12">
+                                        <p class="card-text" style="padding-bottom: 10px;color: #000;">{{task.description}}</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p class="card-text" style="padding-bottom: 10px;color: #000;">hours: {{task.hours}}</p>
+                                    </div>
+                                </a>
+                                <div class="row">
+                                    <div class="col-md-6 d-flex justify-content-end">
+                                        <button class="btn btn-outline-warning" (click)="ShowEditCourse(task.id,task.name,task.description,task.hours,task.imgsrc)">Edit</button>
+                                    </div>
+                                    <div class="col-md-6 d-flex justify-content-start">
+                                        <button class="btn btn-outline-warning" (click)="removeCourse(task.id)">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+  }
+  </div>
+  </div> 
+</div>
+
+<div class="buttondiv">
+  <button class="custom-button" id="btnn" type="button" (click)="ShowAddCourse()">Add Course</button>  
+</div>
+</div>
+@if (showAddCourse) {
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 d-flex justify-content-center">
+      <div class="col-sm-4 border rounded p-3 mb-5">
+        <div class="row text-center">
+          <div class="col-sm-12">
+            <input class="form-control mb-3" [(ngModel)]="course.title" placeholder="Course name" />
+            <input class="form-control mb-3" [(ngModel)]="course.description" placeholder="Course Description" />
+            <input class="form-control mb-3" [(ngModel)]="course.hours" placeholder="Course hours" />
+            
+            <input type="file" class="form-control" (change)="handleFileInput($event)" id="customFile" />
+
+          </div>
+          <div class="col-sm-12">
+            <button class="custom-button" type="button" (click)="addCourse()">Add Course</button>  
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-  <div class="listt">
-    <h4 class="text-center ">{{title}}</h4>
-    
-    <div class="container">
-     <div class="row">
-      <div class="col-sm-12">
-      @if(isAvailable){
-        <table class="table" id="ta">
-          <thead>
-            <tr>
-              <th>Courses</th>
-              <th>Action</th>              
-            </tr>
-          </thead>
-          <tbody>
-            @for(task of Cours;track $index){
-              <tr>
-                <td><div><a routerLink="/1" routerLinkActive="active" >{{ task.name}}  {{task.description}} </a></div>course hours :{{task.hours}}</td>
-                <td>
-                    <button class="btn " (click)="editCourse()">Edit</button>
-                    <button class="btn " (click)="removeCourse(task.id)">Remove </button>
-                  
-                </td>
-              </tr>
-            }
+
+
+}@else if (showEditCourse) 
+{
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 d-flex justify-content-center">
+      <div class="col-sm-4 border rounded p-3 mb-5">
+        <div class="row text-center">
+          <div class="col-sm-12">
+            <input class="form-control mb-3" [(ngModel)]="course.title" placeholder="Course name" />
+            <input class="form-control mb-3" [(ngModel)]="course.description" placeholder="Course Description" />
+            <input class="form-control mb-3" [(ngModel)]="course.hours" placeholder="Course hours" />
             
-          </tbody>
-        </table>
-      }
-      </div>
-     </div> 
-    </div>
-    <div class="buttondiv">
-      <button class="custom-button" type="button" (click)="ShowAddCourse()">Add Course</button>  
-    </div>
-  </div>
-  @if (showAddCourse) {
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12 d-flex justify-content-center">
-          <div class="col-sm-4 border rounded p-3 mb-5">
-            <div class="row text-center">
-              <div class="col-sm-12">
-                <input class="form-control mb-3" [(ngModel)]="course.title" placeholder="Course name" />
-                <input class="form-control mb-3" [(ngModel)]="course.description" placeholder="Course Description" />
-                <input class="form-control mb-3" [(ngModel)]="course.hours" placeholder="Course hours" />
-                
-                <input type="file" class="form-control" id="customFile" />
-              </div>
-              <div class="col-sm-12">
-                <button class="custom-button" type="button" (click)="addCourse()">Add Course</button>  
-              </div>
-            </div>
+            <input type="file" class="form-control"(change)="handleFileInput($event)" id="customFile" />
+          </div>
+          <div class="col-sm-12">
+            <button class="custom-button" type="button" (click)="editCourse(cid)">update Course</button>  
           </div>
         </div>
       </div>
     </div>
-    
-    
-  }
-  
+  </div>
+</div>
+
+}
+

@@ -34,7 +34,7 @@ export const routes: Routes = [
     {path:"instructor", loadChildren:()=>import('./instructor/instructor.module').then(m=>m.InstructorModule)},
     
     {
-      path:'1',
+      path:'courseinfo',
       component:CourseinfoComponent
       
     },
