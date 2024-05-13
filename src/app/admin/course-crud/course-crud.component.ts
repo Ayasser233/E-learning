@@ -14,21 +14,21 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   templateUrl: './course-crud.component.html',
-  styleUrl: './course-crud.component.css'
+  styleUrls: ['./course-crud.component.css']
 })
 export class CourseCrudComponent {
   task_id: any;
   task: any;
 
-  constructor (private route: ActivatedRoute, private adminService: AdminService, private router: Router){}
+  constructor(private route: ActivatedRoute, private adminService: AdminService, private router: Router) { }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.task_id = this.route.snapshot.paramMap.get('id');
     this.task = this.adminService.getTask(this.task_id);
     console.log(this.task);
   }
 
-  onEdit(){
+  onEdit() {
     this.adminService.editTask(this.task_id, this.task);
     this.router.navigate(['/admin']);
     alert('Task has been edited');

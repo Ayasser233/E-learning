@@ -34,8 +34,8 @@ export class AdminDashboardComponent {
   
 
   users = [
-    { id: 1, name: 'John Doe', email: 'john.doe@example.com', status: 'pending' },
-    { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com', status: 'active' }
+    { id: 1, name: 'Test', email: 'Test001@test.com', status: 'pending' },
+    { id: 2, name: 'Mahmoud Mesalem', email: 'mahmoudmesalem23@gmail.com', status: 'active' }
   ];
 
   
@@ -85,6 +85,5 @@ export class AdminDashboardComponent {
 
   deleteUser(id: number) {
     this.users = this.users.filter(user => user.id !== id);
-  }
-
+  }  
 }

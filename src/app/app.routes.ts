@@ -17,7 +17,7 @@ export const routes: Routes = [
 
     {path:"", children:[
         {path:"register", component:RegisterComponent},
-        {path:"" , component:SignInComponent}
+        {path:"" , component:SignInComponent},
         {path:"sign-in" , component:SignInComponent},
         {path:"admin" , component:AdminDashboardComponent},
         {path: "task/:id",component:CourseCrudComponent},
