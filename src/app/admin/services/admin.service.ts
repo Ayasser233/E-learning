@@ -26,9 +26,8 @@ export class AdminService {
 
   editTask(id: number, task: any) {
     this.list[id] = task;
-    const courseId = task.courseId; // Ensure courseId is available in the task object
+    const courseId = task.courseId; 
 
-    // Construct Firestore data with the edited task in the Edited array
     const firestoreData = {
       fields: {
         title: { stringValue: task.name },
