@@ -8,6 +8,7 @@ export class Course {
     assignments: Assignment[];
     hours: string;
     students: number[]; // Array of student IDs enrolled in the course
+    imgsrc:string;
     private constructor() {
       // Private constructor to prevent direct instantiation
       this.id=''
@@ -18,6 +19,7 @@ export class Course {
       this.assignments=[]
       this.hours=''
       this.students=[]
+      this.imgsrc='course.webp'
   }
 
   public static getInstance(): Course {
@@ -34,6 +36,7 @@ export interface CourseMaterial {
     title: string;
     type: MaterialType;
     contentUrl: string;
+    description:string
 }
 
 export enum MaterialType {
@@ -47,7 +50,7 @@ export interface Assignment {
     title: string;
     description: string;
     dueDate: Date;
-    courseId: number; // Reference to the course this assignment belongs to
+    courseId: number; 
     submissions: AssignmentSubmission[];
 }
 
